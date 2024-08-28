@@ -30,7 +30,23 @@ class _HomePageState extends State<HomePage> {
             ),
 
             // space between
-            SizedBox(height: 20.h,),
+            SizedBox(height: 15.h,),
+
+            // guess word text
+            Row(
+              children: [
+                SizedBox(width: 18.w,),
+                Text(
+                  'Guess The Word !!',
+                  style: TextStyle(
+                    fontSize: 25.sp,
+                    color: Colors.black,
+                    fontFamily: 'comic sans',
+                  ),
+                ),
+                const Spacer(),
+              ],
+            ),
 
             // word widget
             WordContainer(
@@ -52,7 +68,7 @@ class _HomePageState extends State<HomePage> {
             ),
 
             // space between
-            SizedBox(height: 15.h,),
+            SizedBox(height: 2.h,),
 
             // keyboard Widget
             KeyboardWidget(
@@ -61,12 +77,13 @@ class _HomePageState extends State<HomePage> {
               height: 200.h,
               boarderWidth: 3.r,
               radius: 20.r,
-              backgroundColor: Colors.white,
-              boarderColor: Colors.grey,
+              backgroundColor: const Color(0xffe0e2e4),
+              boarderColor: Colors.black,
               buttonsStyle: ButtonsStyle(
                 buttonBackgroundColor: Colors.white,
                 buttonBoarderColor: Colors.grey,
                 buttonBoarderForegroundColor: Colors.cyan,
+                buttonForegroundColor: const Color.fromARGB(255, 233, 233, 233),
                 buttonRadius: 11.r,
                 buttonBoarderWidth: 3.r,
                 spaceBetweenButtons: 2.w,
