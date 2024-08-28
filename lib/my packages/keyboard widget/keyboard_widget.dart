@@ -13,12 +13,14 @@ class KeyboardWidget extends StatelessWidget{
   final Color? boarderColor;
   final Color? backgroundColor;
   final ButtonsStyle? buttonsStyle;
+  final void Function(String letter) submitCommand;
   final List<String> _letters1 = ['q','w','e','r','t','u','y','i','o','p'];
   final List<String> _letters2 = ['a','s','d','f','g','h','j','k','l'];
   final List<String> _letters3 = ['z','x','c','v','b','n','m'];
   KeyboardWidget(
     {
       super.key,
+      required this.submitCommand,
       this.height = 200,
       this.width = double.infinity,
       this.backgroundColor = Colors.white,
@@ -56,17 +58,19 @@ class KeyboardWidget extends StatelessWidget{
                 child: Row(
                   children: _letters1.map((letter) => Expanded(
                     child: Button(
+                      command: submitCommand,
                       letter: letter,
                       style: buttonsStyle,
                     ),
                   )).toList(),
                 ),
               ),
-              SizedBox(height:  ((MediaQuery.of(context).size.width > 500) ? 5 : 10).h,),
+              SizedBox(height: ((MediaQuery.of(context).size.width > 500) ? 5 : 10).h,),
               Expanded(
                 child: Row(
                   children: <Widget>[SizedBox(width: 12.w,)] + _letters2.map((letter) => Expanded(
                     child: Button(
+                      command: submitCommand,
                       letter: letter,
                       style: buttonsStyle,
                     ),
@@ -78,6 +82,7 @@ class KeyboardWidget extends StatelessWidget{
                 child: Row(
                   children: <Widget>[SizedBox(width: 33.w,)] + _letters3.map((letter) => Expanded(
                     child: Button(
+                      command: submitCommand,
                       letter: letter,
                       style: buttonsStyle,
                     ),

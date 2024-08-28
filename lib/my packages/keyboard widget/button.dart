@@ -1,30 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:hang_man/my%20packages/keyboard%20widget/models/button_style.dart';
 
-class Button extends StatelessWidget{
+class Button extends StatefulWidget{
   final String letter;
   final ButtonsStyle? style;
-  Button({super.key,required this.letter,this.style}){
+  final void Function(String letter) command;
+  Button({super.key,required this.letter,required this.command,this.style}){
     style ?? ButtonsStyle();
   }
   @override
+  State<Button> createState() => _ButtonState();
+}
+
+class _ButtonState extends State<Button>{
+  bool clicked = false;
+  @override
   Widget build(BuildContext context){
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: style!.spaceBetweenButtons),
-      decoration: BoxDecoration(
-        color: style!.buttonBoarderColor,
-        borderRadius: BorderRadius.circular(style!.buttonRadius),
-      ),
-      padding: EdgeInsets.all(style!.buttonBoarderWidth),
+    return GestureDetector(
+      onTap: () async {
+        widget.command(widget.letter);
+        setState((){
+          clicked = !clicked;
+        });
+        await Future.delayed(const Duration(milliseconds: 200),(){
+          setState((){
+            clicked = !clicked;
+          });
+        });
+      },
       child: Container(
+        margin: EdgeInsets.symmetric(horizontal: widget.style!.spaceBetweenButtons),
         decoration: BoxDecoration(
-          color: style!.buttonBackgroundColor,
-          borderRadius: BorderRadius.circular(style!.buttonRadius-style!.buttonBoarderWidth),
+          color: clicked ? widget.style!.buttonBoarderForegroundColor : widget.style!.buttonBoarderColor,
+          borderRadius: BorderRadius.circular(widget.style!.buttonRadius),
         ),
-        child: Center(
-          child: Text(
-            letter,
-            style: style!.textStyle,
+        padding: EdgeInsets.all(widget.style!.buttonBoarderWidth),
+        child: Container(
+          decoration: BoxDecoration(
+            color: clicked ? widget.style!.buttonForegroundColor : widget.style!.buttonBackgroundColor,
+            borderRadius: BorderRadius.circular(widget.style!.buttonRadius-widget.style!.buttonBoarderWidth),
+          ),
+          child: Center(
+            child: Text(
+              widget.letter,
+              style: widget.style!.textStyle,
+            ),
           ),
         ),
       ),

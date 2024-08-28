@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hang_man/my%20packages/keyboard%20widget/keyboard_widget.dart';
 import 'package:hang_man/my%20packages/keyboard%20widget/models/button_style.dart';
+import 'package:hang_man/core_controller.dart';
+import 'package:hang_man/widgets/word_container.dart';
 class HomePage extends StatelessWidget{
   const HomePage({super.key});
   @override
@@ -26,11 +28,14 @@ class HomePage extends StatelessWidget{
             SizedBox(height: 20.h,),
 
             // word widget
-            Container(
+            WordContainer(
               margin: EdgeInsets.symmetric(horizontal: 15.w),
               width: MediaQuery.of(context).size.width,
               height: 100.h,
-              color: Colors.green,
+              radius: 15.r,
+              boarderWidth: 3.sp,
+              boarderColor: Colors.grey,
+              backgroundColor: Colors.white,
             ),
 
             // space between
@@ -43,9 +48,11 @@ class HomePage extends StatelessWidget{
               height: 200.h,
               boarderWidth: 3.r,
               radius: 20.r,
+              backgroundColor: Colors.white,
+              boarderColor: Colors.grey,
               buttonsStyle: ButtonsStyle(
                 buttonBackgroundColor: Colors.white,
-                buttonBoarderColor: Colors.black,
+                buttonBoarderColor: Colors.grey,
                 buttonBoarderForegroundColor: Colors.cyan,
                 buttonRadius: 11.r,
                 buttonBoarderWidth: 3.r,
@@ -56,7 +63,10 @@ class HomePage extends StatelessWidget{
                   fontFamily: 'comic sans',
                 ),
               ),
-            )
+              submitCommand: (letter){
+                print(coreController.guess(letter));
+              },
+            ),
           ],
         )
       ),
