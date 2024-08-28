@@ -64,6 +64,7 @@ class KeyboardWidget extends StatelessWidget{
                 child: Row(
                   children: _letters1.map((letter) => Expanded(
                     child: Button(
+                      letter: letter,
                       space: spaceBetweenButtons,
                       radius: buttonRadius,
                       boarderWidth: buttonBoarderWidth,
@@ -79,6 +80,7 @@ class KeyboardWidget extends StatelessWidget{
                 child: Row(
                   children: <Widget>[SizedBox(width: 12.w,)] + _letters2.map((letter) => Expanded(
                     child: Button(
+                      letter: letter,
                       space: spaceBetweenButtons,
                       radius: buttonRadius,
                       boarderWidth: buttonBoarderWidth,
@@ -94,6 +96,7 @@ class KeyboardWidget extends StatelessWidget{
                 child: Row(
                   children: <Widget>[SizedBox(width: 33.w,)] + _letters3.map((letter) => Expanded(
                     child: Button(
+                      letter: letter,
                       space: spaceBetweenButtons,
                       radius: buttonRadius,
                       boarderWidth: buttonBoarderWidth,

@@ -45,6 +45,7 @@ class HomePage extends StatelessWidget{
               spaceBetweenButtons: 2.w,
               buttonRadius: 10.r,
               buttonBoarderWidth: 3.r,
+              fontSize: ((MediaQuery.of(context).size.width > 500) ? 25 : 20).r,
             )
           ],
         )
