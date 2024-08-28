@@ -56,8 +56,9 @@ class KeyboardWidget extends StatelessWidget{
           borderRadius: BorderRadius.circular(radius-boarderWidth),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 5.h),
+          padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: ((MediaQuery.of(context).size.width > 500) ? 25 : 30).h),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
                 child: Row(
@@ -73,10 +74,10 @@ class KeyboardWidget extends StatelessWidget{
                   )).toList(),
                 ),
               ),
-              SizedBox(height: 5.h,),
+              SizedBox(height:  ((MediaQuery.of(context).size.width > 500) ? 5 : 10).h,),
               Expanded(
                 child: Row(
-                  children: _letters2.map((letter) => Expanded(
+                  children: <Widget>[SizedBox(width: 12.w,)] + _letters2.map((letter) => Expanded(
                     child: Button(
                       space: spaceBetweenButtons,
                       radius: buttonRadius,
@@ -85,13 +86,13 @@ class KeyboardWidget extends StatelessWidget{
                       backgroundColor: buttonBackgroundColor,
                       boarderColor: buttonBoarderColor,
                     ),
-                  )).toList(),
+                  )).toList() + <Widget>[SizedBox(width: 12.w,)],
                 ),
               ),
-              SizedBox(height: 5.h,),
+              SizedBox(height: ((MediaQuery.of(context).size.width > 500) ? 5 : 10).h,),
               Expanded(
                 child: Row(
-                  children: _letters3.map((letter) => Expanded(
+                  children: <Widget>[SizedBox(width: 33.w,)] + _letters3.map((letter) => Expanded(
                     child: Button(
                       space: spaceBetweenButtons,
                       radius: buttonRadius,
@@ -100,7 +101,7 @@ class KeyboardWidget extends StatelessWidget{
                       backgroundColor: buttonBackgroundColor,
                       boarderColor: buttonBoarderColor,
                     ),
-                  )).toList(),
+                  )).toList() + <Widget>[SizedBox(width: 33.w,)],
                 ),
               ),
             ],

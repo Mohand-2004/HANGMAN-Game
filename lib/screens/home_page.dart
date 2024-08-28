@@ -42,6 +42,9 @@ class HomePage extends StatelessWidget{
               height: 200.h,
               boarderWidth: 3.r,
               radius: 20.r,
+              spaceBetweenButtons: 2.w,
+              buttonRadius: 10.r,
+              buttonBoarderWidth: 3.r,
             )
           ],
         )
