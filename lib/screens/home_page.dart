@@ -4,8 +4,12 @@ import 'package:hang_man/my%20packages/keyboard%20widget/keyboard_widget.dart';
 import 'package:hang_man/my%20packages/keyboard%20widget/models/button_style.dart';
 import 'package:hang_man/core_controller.dart';
 import 'package:hang_man/widgets/word_container.dart';
-class HomePage extends StatelessWidget{
+class HomePage extends StatefulWidget{
   const HomePage({super.key});
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,12 +33,13 @@ class HomePage extends StatelessWidget{
 
             // word widget
             WordContainer(
+              word: coreController.word,
               margin: EdgeInsets.symmetric(horizontal: 15.w),
               width: MediaQuery.of(context).size.width,
               height: 100.h,
-              radius: 15.r,
-              boarderWidth: 3.sp,
-              boarderColor: Colors.grey,
+              // radius: 15.r,
+              // boarderWidth: 3.sp,
+              // boarderColor: Colors.grey,
               backgroundColor: Colors.white,
             ),
 
@@ -64,7 +69,9 @@ class HomePage extends StatelessWidget{
                 ),
               ),
               submitCommand: (letter){
-                print(coreController.guess(letter));
+                setState(() {
+                  coreController.guess(letter);
+                });
               },
             ),
           ],

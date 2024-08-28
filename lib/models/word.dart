@@ -32,4 +32,6 @@ class Word{
       return false;
     }
   }
+
+  List<Letter> get lettes => _letters;
 }
