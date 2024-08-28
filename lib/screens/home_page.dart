@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hang_man/widgets/keyboard%20widget/keyboard_widget.dart';
+import 'package:hang_man/my%20packages/keyboard%20widget/keyboard_widget.dart';
+import 'package:hang_man/my%20packages/keyboard%20widget/models/button_style.dart';
 class HomePage extends StatelessWidget{
   const HomePage({super.key});
   @override
@@ -42,10 +43,19 @@ class HomePage extends StatelessWidget{
               height: 200.h,
               boarderWidth: 3.r,
               radius: 20.r,
-              spaceBetweenButtons: 2.w,
-              buttonRadius: 10.r,
-              buttonBoarderWidth: 3.r,
-              fontSize: ((MediaQuery.of(context).size.width > 500) ? 25 : 20).r,
+              buttonsStyle: ButtonsStyle(
+                buttonBackgroundColor: Colors.white,
+                buttonBoarderColor: Colors.black,
+                buttonBoarderForegroundColor: Colors.cyan,
+                buttonRadius: 11.r,
+                buttonBoarderWidth: 3.r,
+                spaceBetweenButtons: 2.w,
+                textStyle: TextStyle(
+                  color: Colors.black,
+                  fontSize: ((MediaQuery.of(context).size.width > 500) ? 25 : 20).r,
+                  fontFamily: 'comic sans',
+                ),
+              ),
             )
           ],
         )

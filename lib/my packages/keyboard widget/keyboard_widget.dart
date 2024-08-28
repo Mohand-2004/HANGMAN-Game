@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hang_man/widgets/keyboard%20widget/button.dart';
+import 'package:hang_man/my%20packages/keyboard%20widget/button.dart';
+import 'package:hang_man/my%20packages/keyboard%20widget/models/button_style.dart';
+
 
 class KeyboardWidget extends StatelessWidget{
   final double? width;
   final double? height;
-  final double fontSize;
   final double radius;
   final double boarderWidth;
-  final double buttonRadius;
-  final double buttonBoarderWidth;
-  final double spaceBetweenButtons;
   final EdgeInsetsGeometry? margin;
   final Color? boarderColor;
   final Color? backgroundColor;
-  final Color? buttonBoarderColor;
-  final Color? buttonBackgroundColor;
-  final Color? fontColor;
+  final ButtonsStyle? buttonsStyle;
   final List<String> _letters1 = ['q','w','e','r','t','u','y','i','o','p'];
   final List<String> _letters2 = ['a','s','d','f','g','h','j','k','l'];
   final List<String> _letters3 = ['z','x','c','v','b','n','m'];
@@ -27,18 +23,14 @@ class KeyboardWidget extends StatelessWidget{
       this.width = double.infinity,
       this.backgroundColor = Colors.white,
       this.boarderColor = Colors.black,
-      this.buttonBackgroundColor = Colors.white,
-      this.buttonBoarderColor = Colors.black,
-      this.fontColor = Colors.black,
-      this.fontSize = 25,
       this.radius = 20,
       this.boarderWidth = 3,
-      this.buttonRadius = 25,
-      this.buttonBoarderWidth = 3,
-      this.spaceBetweenButtons = 1,
+      this.buttonsStyle,
       this.margin,
     }
-  );
+  ){
+    buttonsStyle ?? const ButtonStyle();
+  }
   @override
   Widget build(BuildContext context){
     return Container(
@@ -65,12 +57,7 @@ class KeyboardWidget extends StatelessWidget{
                   children: _letters1.map((letter) => Expanded(
                     child: Button(
                       letter: letter,
-                      space: spaceBetweenButtons,
-                      radius: buttonRadius,
-                      boarderWidth: buttonBoarderWidth,
-                      fontSize: fontSize,
-                      backgroundColor: buttonBackgroundColor,
-                      boarderColor: buttonBoarderColor,
+                      style: buttonsStyle,
                     ),
                   )).toList(),
                 ),
@@ -81,12 +68,7 @@ class KeyboardWidget extends StatelessWidget{
                   children: <Widget>[SizedBox(width: 12.w,)] + _letters2.map((letter) => Expanded(
                     child: Button(
                       letter: letter,
-                      space: spaceBetweenButtons,
-                      radius: buttonRadius,
-                      boarderWidth: buttonBoarderWidth,
-                      fontSize: fontSize,
-                      backgroundColor: buttonBackgroundColor,
-                      boarderColor: buttonBoarderColor,
+                      style: buttonsStyle,
                     ),
                   )).toList() + <Widget>[SizedBox(width: 12.w,)],
                 ),
@@ -97,12 +79,7 @@ class KeyboardWidget extends StatelessWidget{
                   children: <Widget>[SizedBox(width: 33.w,)] + _letters3.map((letter) => Expanded(
                     child: Button(
                       letter: letter,
-                      space: spaceBetweenButtons,
-                      radius: buttonRadius,
-                      boarderWidth: buttonBoarderWidth,
-                      fontSize: fontSize,
-                      backgroundColor: buttonBackgroundColor,
-                      boarderColor: buttonBoarderColor,
+                      style: buttonsStyle,
                     ),
                   )).toList() + <Widget>[SizedBox(width: 33.w,)],
                 ),
