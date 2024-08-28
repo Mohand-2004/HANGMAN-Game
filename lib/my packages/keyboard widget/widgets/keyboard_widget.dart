@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hang_man/my%20packages/keyboard%20widget/button.dart';
+import 'package:hang_man/my%20packages/keyboard%20widget/widgets/button.dart';
 import 'package:hang_man/my%20packages/keyboard%20widget/models/button_style.dart';
 
 

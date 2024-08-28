@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hang_man/my%20packages/keyboard%20widget/keyboard_widget.dart';
+import 'package:hang_man/models/letter_container_style.dart';
+import 'package:hang_man/my%20packages/keyboard%20widget/widgets/keyboard_widget.dart';
 import 'package:hang_man/my%20packages/keyboard%20widget/models/button_style.dart';
 import 'package:hang_man/core_controller.dart';
 import 'package:hang_man/widgets/word_container.dart';
@@ -37,10 +38,17 @@ class _HomePageState extends State<HomePage> {
               margin: EdgeInsets.symmetric(horizontal: 15.w),
               width: MediaQuery.of(context).size.width,
               height: 100.h,
-              // radius: 15.r,
-              // boarderWidth: 3.sp,
-              // boarderColor: Colors.grey,
               backgroundColor: Colors.white,
+              spaceBetweenLetters: 3.w,
+              letterContainerStyle: LetterContainerStyle(
+                height: 68.r,
+                boarderColor: Colors.grey,
+                boarderWidth: 3.r,
+              ),
+              textStyle: const TextStyle(
+                color: Colors.black,
+                fontFamily: 'comic sans',
+              ),
             ),
 
             // space between
