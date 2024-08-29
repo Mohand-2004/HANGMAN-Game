@@ -2,14 +2,22 @@ import 'dart:math';
 
 import 'package:hang_man/data%20structure/stack.dart';
 import 'package:hang_man/models/word.dart';
-import 'package:hang_man/models/words.dart';
+import 'package:hang_man/models/english_words.dart';
 
 class CoreController{
   late Word _word;
   late Stack<String> _stagesStack;
+  final Map<String,bool> _avalibaleLetters = {};
   CoreController(){
     _initWord();
     _initStack();
+    _initLettersMap();
+  }
+
+  void _initLettersMap(){
+    for(int i = 97;i<=122;i++){
+      _avalibaleLetters[String.fromCharCode(i)] = true;
+    }
   }
 
   void _initWord(){
@@ -44,6 +52,7 @@ class CoreController{
       if(_stagesStack.lenght()!= 1){
         _stagesStack.pop();
       }
+      _avalibaleLetters[letter] = false;
       return false;
     }
   }
@@ -51,7 +60,10 @@ class CoreController{
   void resetGame(){
     _initWord();
     _initStack();
+    _initLettersMap();
   }
+
+  bool isLetterAvailable(String letter) => _avalibaleLetters[letter]!;
 
   Word get word => _word;
   String? get currentStage => _stagesStack.peek();

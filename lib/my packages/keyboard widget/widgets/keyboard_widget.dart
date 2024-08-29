@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hang_man/core_controller.dart';
 import 'package:hang_man/my%20packages/keyboard%20widget/widgets/button.dart';
 import 'package:hang_man/my%20packages/keyboard%20widget/models/button_style.dart';
 
@@ -60,7 +61,20 @@ class KeyboardWidget extends StatelessWidget{
                     child: Button(
                       command: submitCommand,
                       letter: letter,
-                      style: buttonsStyle,
+                      style: coreController.isLetterAvailable(letter) ? buttonsStyle : ButtonsStyle(
+                        buttonBackgroundColor: const Color(0xffe0e2e4),
+                        buttonBoarderColor: Colors.grey,
+                        buttonBoarderForegroundColor: Colors.grey,
+                        buttonForegroundColor: const Color(0xffe0e2e4),
+                        buttonRadius: 11.r,
+                        buttonBoarderWidth: 2.r,
+                        spaceBetweenButtons: 2.w,
+                        textStyle: TextStyle(
+                          color: Colors.grey,
+                          fontSize: ((MediaQuery.of(context).size.width > 500) ? 25 : 20).r,
+                          fontFamily: 'comic sans',
+                        ),
+                      ),
                     ),
                   )).toList(),
                 ),
@@ -72,7 +86,20 @@ class KeyboardWidget extends StatelessWidget{
                     child: Button(
                       command: submitCommand,
                       letter: letter,
-                      style: buttonsStyle,
+                      style: coreController.isLetterAvailable(letter) ? buttonsStyle : ButtonsStyle(
+                        buttonBackgroundColor: const Color(0xffe0e2e4),
+                        buttonBoarderColor: Colors.grey,
+                        buttonBoarderForegroundColor: Colors.grey,
+                        buttonForegroundColor: const Color(0xffe0e2e4),
+                        buttonRadius: 11.r,
+                        buttonBoarderWidth: 2.r,
+                        spaceBetweenButtons: 2.w,
+                        textStyle: TextStyle(
+                          color: Colors.grey,
+                          fontSize: ((MediaQuery.of(context).size.width > 500) ? 25 : 20).r,
+                          fontFamily: 'comic sans',
+                        ),
+                      ),
                     ),
                   )).toList() + <Widget>[SizedBox(width: 12.w,)],
                 ),
@@ -84,7 +111,20 @@ class KeyboardWidget extends StatelessWidget{
                     child: Button(
                       command: submitCommand,
                       letter: letter,
-                      style: buttonsStyle,
+                      style: coreController.isLetterAvailable(letter) ? buttonsStyle : ButtonsStyle(
+                        buttonBackgroundColor: const Color(0xffe0e2e4),
+                        buttonBoarderColor: Colors.grey,
+                        buttonBoarderForegroundColor: Colors.grey,
+                        buttonForegroundColor: const Color(0xffe0e2e4),
+                        buttonRadius: 11.r,
+                        buttonBoarderWidth: 2.r,
+                        spaceBetweenButtons: 2.w,
+                        textStyle: TextStyle(
+                          color: Colors.grey,
+                          fontSize: ((MediaQuery.of(context).size.width > 500) ? 25 : 20).r,
+                          fontFamily: 'comic sans',
+                        ),
+                      ),
                     ),
                   )).toList() + <Widget>[SizedBox(width: 33.w,)],
                 ),

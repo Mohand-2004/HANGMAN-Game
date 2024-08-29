@@ -166,21 +166,23 @@ class _HomePageState extends State<HomePage>{
                     ),
                   ),
                   submitCommand: (letter) async {
-                    setState((){
-                      trueGuess = coreController.guess(letter);
-                    });
-                    await AudioPlayer().play(AssetSource('sounds/$trueGuess.mp3'));
-                    await Future.delayed(const Duration(milliseconds: 500),(){
+                    if(coreController.isLetterAvailable(letter)){
                       setState((){
-                        trueGuess = null;
+                        trueGuess = coreController.guess(letter);
                       });
-                    });
-                    if(coreController.checkWinOrLose() != null){
-                      await Future.delayed(const Duration(seconds: 1),(){
+                      await AudioPlayer().play(AssetSource('sounds/$trueGuess.mp3'));
+                      await Future.delayed(const Duration(milliseconds: 500),(){
                         setState((){
-                          win = coreController.checkWinOrLose();
+                          trueGuess = null;
                         });
                       });
+                      if(coreController.checkWinOrLose() != null){
+                        await Future.delayed(const Duration(seconds: 1),(){
+                          setState((){
+                            win = coreController.checkWinOrLose();
+                          });
+                        });
+                      }
                     }
                   },
                 ),
