@@ -17,12 +17,10 @@ class Word{
 
   bool guess(String gussedLetter){
     if(_counter[gussedLetter] == null || _counter[gussedLetter] == 0){
-      if(_counter[gussedLetter] != null){
-        _counter[gussedLetter] =-_counter[gussedLetter] !- 1;
-      }
       return false;
     }
     else{
+      _counter[gussedLetter] =-_counter[gussedLetter] !- 1;
       for (Letter letter in _letters) {
         if(gussedLetter == "$letter" && !letter.appears){
           letter.appears = true;

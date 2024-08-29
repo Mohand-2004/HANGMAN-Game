@@ -5,6 +5,7 @@ import 'package:hang_man/models/letter_container_style.dart';
 import 'package:hang_man/my%20packages/keyboard%20widget/widgets/keyboard_widget.dart';
 import 'package:hang_man/my%20packages/keyboard%20widget/models/button_style.dart';
 import 'package:hang_man/core_controller.dart';
+import 'package:hang_man/widgets/lose_label.dart';
 import 'package:hang_man/widgets/win_lable.dart';
 import 'package:hang_man/widgets/word_container.dart';
 class HomePage extends StatefulWidget{
@@ -43,7 +44,7 @@ class _HomePageState extends State<HomePage>{
                   onPressed: (){
                     setState((){
                       coreController.resetGame();
-                      win = true;
+                      win = null;
                     });
                   },
                   style: ElevatedButton.styleFrom(
@@ -224,7 +225,15 @@ class _HomePageState extends State<HomePage>{
                 win = null;
               });
             },
-          ) : Container(color: Colors.red,)),
+          ) : LoseLable(
+              loseCommand: (){
+                setState((){
+                coreController.resetGame();
+                  win = null;
+                });
+              }
+            )
+          ),
         ],
       ),
     );

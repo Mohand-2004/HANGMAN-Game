@@ -1,13 +1,20 @@
+import 'dart:math';
+
 import 'package:hang_man/data%20structure/stack.dart';
 import 'package:hang_man/models/word.dart';
+import 'package:hang_man/models/words.dart';
 
 class CoreController{
   late Word _word;
   late Stack<String> _stagesStack;
   CoreController(){
-    String randomWord = "hello";
-    _word = Word(randomWord);
+    _initWord();
     _initStack();
+  }
+
+  void _initWord(){
+    String randomWord = easyEnglishWords[Random().nextInt(easyEnglishWords.length)];
+    _word = Word(randomWord);
   }
 
   void _initStack(){
@@ -42,9 +49,7 @@ class CoreController{
   }
 
   void resetGame(){
-    // choose another word
-    String randomWord = "hello";
-    _word = Word(randomWord);
+    _initWord();
     _initStack();
   }
 
