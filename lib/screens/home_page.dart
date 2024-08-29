@@ -10,97 +10,136 @@ class HomePage extends StatefulWidget{
   @override
   State<HomePage> createState() => _HomePageState();
 }
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>{
+  bool? trueGuess;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
-        margin: EdgeInsets.only(top: 22+4.h,bottom: 10,left: 5.w,right: 5.w),
-        alignment: Alignment.center,
-        color: Colors.white,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // hangman image
-            Container(
-              width: 280.r,
-              height: 280.r,
-              color: Colors.amber,
-            ),
-
-            // space between
-            SizedBox(height: 15.h,),
-
-            // guess word text
-            Row(
+      body: Stack(
+        children: [
+          Container(
+            margin: EdgeInsets.only(top: 22+4.h,bottom: 10,left: 5.w,right: 5.w),
+            alignment: Alignment.center,
+            color: Colors.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(width: 18.w,),
-                Text(
-                  'Guess The Word !!',
-                  style: TextStyle(
-                    fontSize: 25.sp,
+                // hangman image
+                Container(
+                  width: 280.r,
+                  height: 280.r,
+                  color: Colors.amber,
+                ),
+          
+                // space between
+                SizedBox(height: 15.h,),
+          
+                // guess word text
+                Row(
+                  children: [
+                    SizedBox(width: 18.w,),
+                    Text(
+                      'Guess The Word !!',
+                      style: TextStyle(
+                        fontSize: 25.sp,
+                        color: Colors.black,
+                        fontFamily: 'comic sans',
+                      ),
+                    ),
+                    const Spacer(),
+                  ],
+                ),
+          
+                // word widget
+                WordContainer(
+                  word: coreController.word,
+                  margin: EdgeInsets.symmetric(horizontal: 15.w),
+                  width: MediaQuery.of(context).size.width,
+                  height: 100.h,
+                  backgroundColor: Colors.white,
+                  spaceBetweenLetters: 3.w,
+                  letterContainerStyle: LetterContainerStyle(
+                    height: 68.r,
+                    boarderColor: Colors.grey,
+                    boarderWidth: 3.r,
+                  ),
+                  textStyle: const TextStyle(
                     color: Colors.black,
                     fontFamily: 'comic sans',
                   ),
                 ),
-                const Spacer(),
-              ],
-            ),
-
-            // word widget
-            WordContainer(
-              word: coreController.word,
-              margin: EdgeInsets.symmetric(horizontal: 15.w),
-              width: MediaQuery.of(context).size.width,
-              height: 100.h,
-              backgroundColor: Colors.white,
-              spaceBetweenLetters: 3.w,
-              letterContainerStyle: LetterContainerStyle(
-                height: 68.r,
-                boarderColor: Colors.grey,
-                boarderWidth: 3.r,
-              ),
-              textStyle: const TextStyle(
-                color: Colors.black,
-                fontFamily: 'comic sans',
-              ),
-            ),
-
-            // space between
-            SizedBox(height: 2.h,),
-
-            // keyboard Widget
-            KeyboardWidget(
-              margin: EdgeInsets.symmetric(horizontal: 15.w),
-              width: MediaQuery.of(context).size.width,
-              height: 200.h,
-              boarderWidth: 3.r,
-              radius: 20.r,
-              backgroundColor: const Color(0xffe0e2e4),
-              boarderColor: Colors.black,
-              buttonsStyle: ButtonsStyle(
-                buttonBackgroundColor: Colors.white,
-                buttonBoarderColor: Colors.grey,
-                buttonBoarderForegroundColor: Colors.cyan,
-                buttonForegroundColor: const Color.fromARGB(255, 233, 233, 233),
-                buttonRadius: 11.r,
-                buttonBoarderWidth: 3.r,
-                spaceBetweenButtons: 2.w,
-                textStyle: TextStyle(
-                  color: Colors.black,
-                  fontSize: ((MediaQuery.of(context).size.width > 500) ? 25 : 20).r,
-                  fontFamily: 'comic sans',
+          
+                // space between
+                SizedBox(height: 2.h,),
+          
+                // keyboard Widget
+                KeyboardWidget(
+                  margin: EdgeInsets.symmetric(horizontal: 15.w),
+                  width: MediaQuery.of(context).size.width,
+                  height: 200.h,
+                  boarderWidth: 3.r,
+                  radius: 20.r,
+                  backgroundColor: const Color(0xffe0e2e4),
+                  boarderColor: Colors.black,
+                  buttonsStyle: ButtonsStyle(
+                    buttonBackgroundColor: Colors.white,
+                    buttonBoarderColor: Colors.grey,
+                    buttonBoarderForegroundColor: Colors.cyan,
+                    buttonForegroundColor: const Color.fromARGB(255, 233, 233, 233),
+                    buttonRadius: 11.r,
+                    buttonBoarderWidth: 3.r,
+                    spaceBetweenButtons: 2.w,
+                    textStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: ((MediaQuery.of(context).size.width > 500) ? 25 : 20).r,
+                      fontFamily: 'comic sans',
+                    ),
+                  ),
+                  submitCommand: (letter) async {
+                    setState((){
+                      trueGuess = coreController.guess(letter);
+                    });
+                    // playsound
+                    await Future.delayed(const Duration(milliseconds: 500),(){
+                      setState((){
+                        trueGuess = null;
+                      });
+                    });
+                  },
                 ),
+              ],
+            )
+          ),
+
+          // true or false indicator
+          trueGuess != null ? Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  trueGuess! ? const Color.fromARGB(255, 0, 255, 8) : const Color.fromARGB(255, 255, 17, 0),
+                  for(int i = 0;i<50;i++)Colors.transparent,
+                  trueGuess! ? const Color.fromARGB(255, 0, 255, 8) : const Color.fromARGB(255, 255, 17, 0),
+                ],
               ),
-              submitCommand: (letter){
-                setState(() {
-                  coreController.guess(letter);
-                });
-              },
             ),
-          ],
-        )
+          ) : const SizedBox(),
+
+          // true or false indicator
+          trueGuess != null ? Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  trueGuess! ? const Color.fromARGB(255, 0, 255, 8) : const Color.fromARGB(255, 255, 17, 0),
+                  for(int i = 0;i<50;i++)Colors.transparent,
+                  trueGuess! ? const Color.fromARGB(255, 0, 255, 8) : const Color.fromARGB(255, 255, 17, 0),
+                ],
+              ),
+            ),
+          ) : const SizedBox(),
+        ],
       ),
     );
   }
