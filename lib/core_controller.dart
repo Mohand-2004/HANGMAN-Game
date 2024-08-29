@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:hang_man/data%20structure/stack.dart';
 import 'package:hang_man/models/arabic_words.dart';
 import 'package:hang_man/models/language_enum.dart';
@@ -41,6 +40,16 @@ class CoreController{
     for(int i = 5;i>=1;i--){
       _stagesStack.push("assets/images/stage $i.png");
     }
+  }
+
+  void changeLanguage(){
+    if(language == Language.arabic){
+      language = Language.english;
+    }
+    else{
+      language = Language.arabic;
+    }
+    resetGame();
   }
 
   bool? checkWinOrLose(){

@@ -40,6 +40,21 @@ class _HomePageState extends State<HomePage>{
               ),
               const Spacer(),
               Padding(
+                padding: const EdgeInsets.only(top: 35),
+                child: IconButton(
+                  onPressed: (){
+                    setState(() {
+                      coreController.changeLanguage();
+                    });
+                  },
+                  icon: Icon(
+                    Icons.language_outlined,
+                    size: 22.r,
+                  ),
+                ),
+              ),
+              SizedBox(width: (MediaQuery.of(context).size.width > 500 ? 5.w : 0),),
+              Padding(
                 padding: EdgeInsets.only(right: 12.w,top: 37),
                 child: ElevatedButton(
                   onPressed: (){
