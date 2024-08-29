@@ -11,6 +11,7 @@ class CoreController{
   late Stack<String> _stagesStack;
   final Map<String,bool> _avalibaleLetters = {};
   Language language = Language.arabic;
+  late String randomWord;
   CoreController(){
     _initWord();
     _initStack();
@@ -31,7 +32,7 @@ class CoreController{
   }
 
   void _initWord(){
-    String randomWord = language == Language.english ? easyEnglishWords[Random().nextInt(easyEnglishWords.length)] : easyArabicWords[Random().nextInt(easyArabicWords.length)];
+    randomWord = language == Language.english ? easyEnglishWords[Random().nextInt(easyEnglishWords.length)] : easyArabicWords[Random().nextInt(easyArabicWords.length)];
     _word = Word(randomWord);
   }
 

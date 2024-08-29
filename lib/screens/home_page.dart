@@ -229,6 +229,7 @@ class _HomePageState extends State<HomePage>{
               });
             },
           ) : LoseLable(
+            correctWord: coreController.randomWord,
               loseCommand: (){
                 setState((){
                 coreController.resetGame();

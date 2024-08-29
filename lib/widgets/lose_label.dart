@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoseLable extends StatelessWidget{
   final void Function() loseCommand;
-  const LoseLable({super.key,required this.loseCommand});
+  final String correctWord;
+  const LoseLable({super.key,required this.loseCommand,required this.correctWord});
   @override
   Widget build(BuildContext context){
     return Container(
@@ -29,7 +30,16 @@ class LoseLable extends StatelessWidget{
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 8.h,),
+          
+          Text(
+            '($correctWord)',
+            style: TextStyle(
+              fontSize: 30.sp,
+              color: const Color.fromARGB(255, 0, 183, 6),
+              fontFamily: 'comic sans',
+            ),
+          ),
+          SizedBox(height: 16.h,),
           GestureDetector(
             onTap: loseCommand,
             child: Container(
