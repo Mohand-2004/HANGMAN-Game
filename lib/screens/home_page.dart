@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hang_man/models/letter_container_style.dart';
@@ -16,19 +17,57 @@ class _HomePageState extends State<HomePage>{
   Widget build(BuildContext context){
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize: Size(MediaQuery.of(context).size.width,55.h),
+        child: Container(
+          color: Colors.blue,
+          child: Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 32,bottom: 5,left: 12.w),
+                child: Text(
+                  'HANGMAN GAME',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontFamily: 'impact',
+                    fontSize: 30.sp,
+                  ),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: (){},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.r),
+                  )
+                ),
+                child: Text(
+                  'Reset',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'comic sans',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
       body: Stack(
         children: [
           Container(
-            margin: EdgeInsets.only(top: 22+4.h,bottom: 10,left: 5.w,right: 5.w),
+            margin: EdgeInsets.only(top: 12.h,left: 5.w,right: 5.w),
             alignment: Alignment.center,
             color: Colors.white,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 // hangman image
                 Container(
-                  width: 280.r,
-                  height: 280.r,
+                  width: 240.r,
+                  height: 240.r,
                   color: Colors.amber,
                 ),
           
@@ -88,7 +127,7 @@ class _HomePageState extends State<HomePage>{
                     buttonBoarderForegroundColor: Colors.cyan,
                     buttonForegroundColor: const Color.fromARGB(255, 233, 233, 233),
                     buttonRadius: 11.r,
-                    buttonBoarderWidth: 3.r,
+                    buttonBoarderWidth: 2.r,
                     spaceBetweenButtons: 2.w,
                     textStyle: TextStyle(
                       color: Colors.black,
@@ -100,7 +139,7 @@ class _HomePageState extends State<HomePage>{
                     setState((){
                       trueGuess = coreController.guess(letter);
                     });
-                    // playsound
+                    await AudioPlayer().play(AssetSource('sounds/$trueGuess.mp3'));
                     await Future.delayed(const Duration(milliseconds: 500),(){
                       setState((){
                         trueGuess = null;
