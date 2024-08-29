@@ -5,6 +5,7 @@ import 'package:hang_man/models/letter_container_style.dart';
 import 'package:hang_man/my%20packages/keyboard%20widget/widgets/keyboard_widget.dart';
 import 'package:hang_man/my%20packages/keyboard%20widget/models/button_style.dart';
 import 'package:hang_man/core_controller.dart';
+import 'package:hang_man/widgets/win_lable.dart';
 import 'package:hang_man/widgets/word_container.dart';
 class HomePage extends StatefulWidget{
   const HomePage({super.key});
@@ -42,7 +43,7 @@ class _HomePageState extends State<HomePage>{
                   onPressed: (){
                     setState((){
                       coreController.resetGame();
-                      win = null;
+                      win = true;
                     });
                   },
                   style: ElevatedButton.styleFrom(
@@ -69,7 +70,7 @@ class _HomePageState extends State<HomePage>{
                         Icons.restart_alt_rounded,
                         color: Colors.white,
                         size: 15.r,
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -216,7 +217,14 @@ class _HomePageState extends State<HomePage>{
 
           // win or lose widget
           win == null ? const SizedBox() : 
-          (win! ? Container(color: Colors.green,) : Container(color: Colors.red,)),
+          (win! ? WinLable(
+            winCommand: (){
+              setState(() {
+                coreController.resetGame();
+                win = null;
+              });
+            },
+          ) : Container(color: Colors.red,)),
         ],
       ),
     );

@@ -82,6 +82,12 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
+    - family: Berlin Sans FB Demi
+      fonts:
+        - asset: assets/fonts/BRLNSDB.TTF
+    - family: Monotype Corsiva
+      fonts:
+        - asset: assets/fonts/MTCORSVA.TTF
     - family: 'comic sans'
       fonts:
         - asset: assets/fonts/Ldfcomicsans-jj7l.ttf
