@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hang_man/core_controller.dart';
+import 'package:hang_man/models/language_enum.dart';
 import 'package:hang_man/my%20packages/keyboard%20widget/widgets/button.dart';
 import 'package:hang_man/my%20packages/keyboard%20widget/models/button_style.dart';
 
@@ -15,9 +16,9 @@ class KeyboardWidget extends StatelessWidget{
   final Color? backgroundColor;
   final ButtonsStyle? buttonsStyle;
   final void Function(String letter) submitCommand;
-  final List<String> _letters1 = ['q','w','e','r','t','u','y','i','o','p'];
-  final List<String> _letters2 = ['a','s','d','f','g','h','j','k','l'];
-  final List<String> _letters3 = ['z','x','c','v','b','n','m'];
+  final List<String> _letters1 = coreController.language == Language.english ? ['q','w','e','r','t','u','y','i','o','p'] : ['ض','ص','ث','ق','ف','غ','ع','ه','خ','ح'] ;
+  final List<String> _letters2 = coreController.language == Language.english ? ['a','s','d','f','g','h','j','k','l'] : ['ج','ش','س','ي','ب','ل','ا','ت','ن','م'];
+  final List<String> _letters3 = coreController.language == Language.english ? ['z','x','c','v','b','n','m'] : ['ك','ة','ظ','ط','ذ','د','ز','ر','و'];
   KeyboardWidget(
     {
       super.key,

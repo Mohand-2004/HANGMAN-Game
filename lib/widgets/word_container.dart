@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hang_man/core_controller.dart';
+import 'package:hang_man/models/language_enum.dart';
 import 'package:hang_man/models/letter_container_style.dart';
 import 'package:hang_man/models/word.dart';
 import 'package:hang_man/widgets/boarderd_container.dart';
@@ -36,7 +38,7 @@ class WordContainer extends StatelessWidget{
       margin: margin,
       color: backgroundColor,
       child: Row(
-        children: word.lettes.map((letter) => Expanded(
+        children: (coreController.language == Language.english ? word.lettes : word.lettes.reversed).map((letter) => Expanded(
           child: BoarderdContainer(
             margin: EdgeInsets.symmetric(horizontal: spaceBetweenLetters),
             backgroundColor: letterContainerStyle!.backgroundColor,

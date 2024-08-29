@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hang_man/models/language_enum.dart';
 import 'package:hang_man/models/letter_container_style.dart';
 import 'package:hang_man/my%20packages/keyboard%20widget/widgets/keyboard_widget.dart';
 import 'package:hang_man/my%20packages/keyboard%20widget/models/button_style.dart';
@@ -161,7 +162,7 @@ class _HomePageState extends State<HomePage>{
                     spaceBetweenButtons: 2.w,
                     textStyle: TextStyle(
                       color: Colors.black,
-                      fontSize: ((MediaQuery.of(context).size.width > 500) ? 25 : 20).r,
+                      fontSize: ((MediaQuery.of(context).size.width > 500) ? (coreController.language == Language.arabic ? 21 : 25) : (coreController.language == Language.arabic ? 16 : 20)).r,
                       fontFamily: 'comic sans',
                     ),
                   ),
