@@ -17,6 +17,13 @@ class CoreController{
     }
   }
 
+  void resetGame(){
+    // choose another word
+    String randomWord = "hello";
+    _word = Word(randomWord);
+    // reset stack
+  }
+
   Word get word => _word;
 }
 CoreController coreController = CoreController();

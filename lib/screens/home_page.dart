@@ -20,11 +20,11 @@ class _HomePageState extends State<HomePage>{
       appBar: PreferredSize(
         preferredSize: Size(MediaQuery.of(context).size.width,55.h),
         child: Container(
-          color: Colors.blue,
+          color: Colors.white,
           child: Row(
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 32,bottom: 5,left: 12.w),
+                padding: EdgeInsets.only(top: 35,bottom: 5,left: 12.w),
                 child: Text(
                   'HANGMAN GAME',
                   style: TextStyle(
@@ -34,20 +34,41 @@ class _HomePageState extends State<HomePage>{
                   ),
                 ),
               ),
-              ElevatedButton(
-                onPressed: (){},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.r),
-                  )
-                ),
-                child: Text(
-                  'Reset',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'comic sans',
-                    fontWeight: FontWeight.bold,
+              const Spacer(),
+              Padding(
+                padding: EdgeInsets.only(right: 12.w,top: 37),
+                child: ElevatedButton(
+                  onPressed: (){
+                    setState((){
+                      coreController.resetGame();
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.r),
+                    ),
+                    fixedSize: Size(85.w,40.h-10)
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Reset',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'comic sans',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 10.sp,
+                        ),
+                      ),
+                      SizedBox(width: 3.w,),
+                      Icon(
+                        Icons.restart_alt_rounded,
+                        color: Colors.white,
+                        size: 12.r,
+                      )
+                    ],
                   ),
                 ),
               )
@@ -58,17 +79,17 @@ class _HomePageState extends State<HomePage>{
       body: Stack(
         children: [
           Container(
-            margin: EdgeInsets.only(top: 12.h,left: 5.w,right: 5.w),
+            margin: EdgeInsets.only(top: 12.h,bottom: 20,left: 5.w,right: 5.w),
             alignment: Alignment.center,
             color: Colors.white,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 // hangman image
-                Container(
-                  width: 240.r,
-                  height: 240.r,
-                  color: Colors.amber,
+                Expanded(
+                  child: Container(
+                    color: Colors.amber,
+                  ),
                 ),
           
                 // space between
