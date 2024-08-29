@@ -1,10 +1,32 @@
+import 'package:hang_man/data%20structure/stack.dart';
 import 'package:hang_man/models/word.dart';
 
 class CoreController{
   late Word _word;
+  late Stack<String> _stagesStack;
   CoreController(){
     String randomWord = "hello";
     _word = Word(randomWord);
+    _initStack();
+  }
+
+  void _initStack(){
+    _stagesStack = Stack();
+    for(int i = 5;i>=1;i--){
+      _stagesStack.push("assets/images/stage $i.png");
+    }
+  }
+
+  bool? checkWinOrLose(){
+    if(_word.isAllLettersAppear()){
+      return true;
+    }
+    else if(_stagesStack.lenght() == 1){
+      return false;
+    }
+    else{
+      return null;
+    }
   }
 
   bool guess(String letter){
@@ -12,7 +34,9 @@ class CoreController{
       return true;
     }
     else{
-      // pop states stack
+      if(_stagesStack.lenght()!= 1){
+        _stagesStack.pop();
+      }
       return false;
     }
   }
@@ -21,9 +45,10 @@ class CoreController{
     // choose another word
     String randomWord = "hello";
     _word = Word(randomWord);
-    // reset stack
+    _initStack();
   }
 
   Word get word => _word;
+  String? get currentStage => _stagesStack.peek();
 }
 CoreController coreController = CoreController();

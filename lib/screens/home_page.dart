@@ -13,6 +13,7 @@ class HomePage extends StatefulWidget{
 }
 class _HomePageState extends State<HomePage>{
   bool? trueGuess;
+  bool? win;
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -41,6 +42,7 @@ class _HomePageState extends State<HomePage>{
                   onPressed: (){
                     setState((){
                       coreController.resetGame();
+                      win = null;
                     });
                   },
                   style: ElevatedButton.styleFrom(
@@ -48,7 +50,7 @@ class _HomePageState extends State<HomePage>{
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.r),
                     ),
-                    fixedSize: Size(85.w,40.h-10)
+                    fixedSize: Size(89.w,40.h-10)
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -66,7 +68,7 @@ class _HomePageState extends State<HomePage>{
                       Icon(
                         Icons.restart_alt_rounded,
                         color: Colors.white,
-                        size: 12.r,
+                        size: 15.r,
                       )
                     ],
                   ),
@@ -88,7 +90,12 @@ class _HomePageState extends State<HomePage>{
                 // hangman image
                 Expanded(
                   child: Container(
-                    color: Colors.amber,
+                    decoration: BoxDecoration(
+                      color: Colors.amber,
+                      image: DecorationImage(
+                        image: AssetImage(coreController.currentStage!),
+                      ),
+                    ),
                   ),
                 ),
           
@@ -166,10 +173,17 @@ class _HomePageState extends State<HomePage>{
                         trueGuess = null;
                       });
                     });
+                    if(coreController.checkWinOrLose() != null){
+                      await Future.delayed(const Duration(seconds: 1),(){
+                        setState((){
+                          win = coreController.checkWinOrLose();
+                        });
+                      });
+                    }
                   },
                 ),
               ],
-            )
+            ),
           ),
 
           // true or false indicator
@@ -199,6 +213,10 @@ class _HomePageState extends State<HomePage>{
               ),
             ),
           ) : const SizedBox(),
+
+          // win or lose widget
+          win == null ? const SizedBox() : 
+          (win! ? Container(color: Colors.green,) : Container(color: Colors.red,)),
         ],
       ),
     );

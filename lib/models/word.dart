@@ -33,5 +33,14 @@ class Word{
     }
   }
 
+  bool isAllLettersAppear(){
+    for(Letter letter in _letters){
+      if(!letter.appears){
+        return false;
+      }
+    }
+    return true;
+  }
+
   List<Letter> get lettes => _letters;
 }
