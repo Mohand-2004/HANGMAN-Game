@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:hang_man/data%20structure/stack.dart';
 import 'package:hang_man/models/arabic_words.dart';
 import 'package:hang_man/models/language_enum.dart';
+import 'package:hang_man/models/random_word.dart';
 import 'package:hang_man/models/word.dart';
 import 'package:hang_man/models/english_words.dart';
 
@@ -10,7 +11,7 @@ class CoreController{
   late Stack<String> _stagesStack;
   final Map<String,bool> _avalibaleLetters = {};
   Language language = Language.arabic;
-  late String randomWord;
+  late RandomWord randomWord;
   CoreController(){
     _initWord();
     _initStack();
@@ -32,7 +33,7 @@ class CoreController{
 
   void _initWord(){
     randomWord = language == Language.english ? easyEnglishWords[Random().nextInt(easyEnglishWords.length)] : easyArabicWords[Random().nextInt(easyArabicWords.length)];
-    _word = Word(randomWord);
+    _word = Word(randomWord.word);
   }
 
   void _initStack(){

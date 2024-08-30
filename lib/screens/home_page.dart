@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage>{
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      coreController.language == Language.english ? Text(
                         'Reset',
                         style: TextStyle(
                           color: Colors.white,
@@ -81,12 +81,27 @@ class _HomePageState extends State<HomePage>{
                           fontWeight: FontWeight.bold,
                           fontSize: 10.sp,
                         ),
-                      ),
-                      SizedBox(width: 3.w,),
-                      Icon(
+                      ) : Icon(
                         Icons.restart_alt_rounded,
                         color: Colors.white,
                         size: 15.r,
+                      ),
+                      SizedBox(width: 3.w,),
+                      coreController.language == Language.english ? Icon(
+                        Icons.restart_alt_rounded,
+                        color: Colors.white,
+                        size: 15.r,
+                      ) : Padding(
+                        padding: const EdgeInsets.only(top: 4),
+                        child: Text(
+                          'إعادة',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'comic sans',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12.sp,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -123,16 +138,16 @@ class _HomePageState extends State<HomePage>{
                 // guess word text
                 Row(
                   children: [
-                    SizedBox(width: 18.w,),
+                    coreController.language == Language.english ? SizedBox(width: 18.w,) : const Spacer(),
                     Text(
-                      'Guess The Word !!',
+                      coreController.language == Language.english ? 'Guess The Word !!' : '!! خمن ما هي الكلمة',
                       style: TextStyle(
                         fontSize: 25.sp,
                         color: Colors.black,
                         fontFamily: 'comic sans',
                       ),
                     ),
-                    const Spacer(),
+                    coreController.language == Language.english ? const Spacer() : SizedBox(width: 18.w,),
                   ],
                 ),
           
@@ -244,7 +259,7 @@ class _HomePageState extends State<HomePage>{
               });
             },
           ) : LoseLable(
-            correctWord: coreController.randomWord,
+            correctWord: coreController.randomWord.word,
               loseCommand: (){
                 setState((){
                 coreController.resetGame();
