@@ -151,8 +151,12 @@ class _HomePageState extends State<HomePage>{
                     Padding(
                       padding: EdgeInsets.only(bottom: 2.5.h),
                       child: CircleAvatar(
-                        backgroundColor: Colors.amber,
-                        radius: 13.5.r,
+                        backgroundColor: const Color(0xffe0e2e4),
+                        radius: 15.r,
+                        child: Padding(
+                          padding: const EdgeInsets.all(2.5),
+                          child: Image.asset('assets/images/hint.png'),
+                        ),
                       ),
                     ),
                     const Spacer(),
@@ -161,8 +165,9 @@ class _HomePageState extends State<HomePage>{
                     Padding(
                       padding: EdgeInsets.only(bottom: 2.5.h),
                       child: CircleAvatar(
-                        backgroundColor: Colors.amber,
+                        backgroundColor: const Color(0xffe0e2e4),
                         radius: 13.5.r,
+                        child: Image.asset('assets/images/hint.png'),
                       ),
                     ),
                     SizedBox(width: 10.w,),
