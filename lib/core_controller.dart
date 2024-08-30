@@ -78,6 +78,32 @@ class CoreController{
     }
   }
 
+  String _formteHints(String hintText){
+    int counter = 0;
+    String newHints = '';
+    bool newLine = false;
+    for(int i = 0;i<hintText.length;i++){
+      switch(hintText[i]){
+        case '\n':
+          counter = 0;
+          break;
+        default:
+          counter++;
+          break;
+      }
+      newHints += hintText[i];
+      if(counter > 32){
+        newLine = true;
+      }
+      if(hintText[i] == " " && newLine){
+        newLine = false;
+        counter = 0;
+        newHints += '\n';
+      }
+    }
+    return newHints;
+  }
+
   void resetGame(){
     _initWord();
     _initStack();
@@ -88,5 +114,6 @@ class CoreController{
 
   Word get word => _word;
   String? get currentStage => _stagesStack.peek();
+  String get wordHint => _formteHints(randomWord.hints);
 }
 CoreController coreController = CoreController();

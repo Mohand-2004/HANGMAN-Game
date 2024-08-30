@@ -137,18 +137,45 @@ class _HomePageState extends State<HomePage>{
           
                 // guess word text
                 Row(
-                  children: [
-                    coreController.language == Language.english ? SizedBox(width: 18.w,) : const Spacer(),
+                  children: coreController.language == Language.english ? [
+                    SizedBox(width: 18.w,),
                     Text(
-                      coreController.language == Language.english ? 'Guess The Word !!' : '!! خمن ما هي الكلمة',
+                      'Guess The Word !!',
                       style: TextStyle(
                         fontSize: 25.sp,
                         color: Colors.black,
                         fontFamily: 'comic sans',
                       ),
                     ),
-                    coreController.language == Language.english ? const Spacer() : SizedBox(width: 18.w,),
-                  ],
+                    SizedBox(width: 10.w,),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 2.5.h),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.amber,
+                        radius: 13.5.r,
+                      ),
+                    ),
+                    const Spacer(),
+                  ] : [
+                    const Spacer(),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 2.5.h),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.amber,
+                        radius: 13.5.r,
+                      ),
+                    ),
+                    SizedBox(width: 10.w,),
+                    Text(
+                      '!! خمن ما هي الكلمة',
+                      style: TextStyle(
+                        fontSize: 25.sp,
+                        color: Colors.black,
+                        fontFamily: 'comic sans',
+                      ),
+                    ),
+                    SizedBox(width: 18.w,),
+                  ]
                 ),
           
                 // word widget
