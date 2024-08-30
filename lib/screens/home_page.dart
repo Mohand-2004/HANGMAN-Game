@@ -17,6 +17,7 @@ class HomePage extends StatefulWidget{
 class _HomePageState extends State<HomePage>{
   bool? trueGuess;
   bool? win;
+  bool showHintAlert = false;
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -61,6 +62,7 @@ class _HomePageState extends State<HomePage>{
                     setState((){
                       coreController.resetGame();
                       win = null;
+                      showHintAlert = false;
                     });
                   },
                   style: ElevatedButton.styleFrom(
@@ -113,143 +115,165 @@ class _HomePageState extends State<HomePage>{
       ),
       body: Stack(
         children: [
-          Container(
-            margin: EdgeInsets.only(top: 12.h,bottom: 20,left: 5.w,right: 5.w),
-            alignment: Alignment.center,
-            color: Colors.white,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                // hangman image
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.amber,
-                      image: DecorationImage(
-                        image: AssetImage(coreController.currentStage!),
-                      ),
-                    ),
-                  ),
-                ),
-          
-                // space between
-                SizedBox(height: 15.h,),
-          
-                // guess word text
-                Row(
-                  children: coreController.language == Language.english ? [
-                    SizedBox(width: 18.w,),
-                    Text(
-                      'Guess The Word !!',
-                      style: TextStyle(
-                        fontSize: 25.sp,
-                        color: Colors.black,
-                        fontFamily: 'comic sans',
-                      ),
-                    ),
-                    SizedBox(width: 10.w,),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 2.5.h),
-                      child: CircleAvatar(
-                        backgroundColor: const Color(0xffe0e2e4),
-                        radius: 15.r,
-                        child: Padding(
-                          padding: const EdgeInsets.all(2.5),
-                          child: Image.asset('assets/images/hint.png'),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                showHintAlert = false;
+              });
+            },
+            child: Container(
+              margin: EdgeInsets.only(top: 12.h,bottom: 20,left: 5.w,right: 5.w),
+              alignment: Alignment.center,
+              color: Colors.white,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  // hangman image
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.amber,
+                        image: DecorationImage(
+                          image: AssetImage(coreController.currentStage!),
                         ),
                       ),
                     ),
-                    const Spacer(),
-                  ] : [
-                    const Spacer(),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 2.5.h),
-                      child: CircleAvatar(
-                        backgroundColor: const Color(0xffe0e2e4),
-                        radius: 13.5.r,
-                        child: Image.asset('assets/images/hint.png'),
-                      ),
-                    ),
-                    SizedBox(width: 10.w,),
-                    Text(
-                      '!! خمن ما هي الكلمة',
-                      style: TextStyle(
-                        fontSize: 25.sp,
-                        color: Colors.black,
-                        fontFamily: 'comic sans',
-                      ),
-                    ),
-                    SizedBox(width: 18.w,),
-                  ]
-                ),
-          
-                // word widget
-                WordContainer(
-                  word: coreController.word,
-                  margin: EdgeInsets.symmetric(horizontal: 15.w),
-                  width: MediaQuery.of(context).size.width,
-                  height: 100.h,
-                  backgroundColor: Colors.white,
-                  spaceBetweenLetters: 3.w,
-                  letterContainerStyle: LetterContainerStyle(
-                    height: 68.r,
-                    boarderColor: Colors.grey,
-                    boarderWidth: 3.r,
                   ),
-                  textStyle: const TextStyle(
-                    color: Colors.black,
-                    fontFamily: 'comic sans',
+            
+                  // space between
+                  SizedBox(height: 15.h,),
+            
+                  // guess word text
+                  Row(
+                    children: coreController.language == Language.english ? [
+                      SizedBox(width: 18.w,),
+                      Text(
+                        'Guess The Word !!',
+                        style: TextStyle(
+                          fontSize: 25.sp,
+                          color: Colors.black,
+                          fontFamily: 'comic sans',
+                        ),
+                      ),
+                      SizedBox(width: 10.w,),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 2.5.h),
+                        child: GestureDetector(
+                          onTap: (){
+                            setState((){
+                              showHintAlert = !showHintAlert;
+                            });
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: const Color(0xffe0e2e4),
+                            radius: 15.r,
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.5),
+                              child: Image.asset('assets/images/hint.png'),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const Spacer(),
+                    ] : [
+                      const Spacer(),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 2.5.h),
+                        child: GestureDetector(
+                          onTap: (){
+                            setState((){
+                              showHintAlert = !showHintAlert;
+                            });
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: const Color(0xffe0e2e4),
+                            radius: 13.5.r,
+                            child: Image.asset('assets/images/hint.png'),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10.w,),
+                      Text(
+                        '!! خمن ما هي الكلمة',
+                        style: TextStyle(
+                          fontSize: 25.sp,
+                          color: Colors.black,
+                          fontFamily: 'comic sans',
+                        ),
+                      ),
+                      SizedBox(width: 18.w,),
+                    ]
                   ),
-                ),
-          
-                // space between
-                SizedBox(height: 2.h,),
-          
-                // keyboard Widget
-                KeyboardWidget(
-                  margin: EdgeInsets.symmetric(horizontal: 15.w),
-                  width: MediaQuery.of(context).size.width,
-                  height: 200.h,
-                  boarderWidth: 3.r,
-                  radius: 20.r,
-                  backgroundColor: const Color(0xffe0e2e4),
-                  boarderColor: Colors.black,
-                  buttonsStyle: ButtonsStyle(
-                    buttonBackgroundColor: Colors.white,
-                    buttonBoarderColor: Colors.grey,
-                    buttonBoarderForegroundColor: Colors.cyan,
-                    buttonForegroundColor: const Color.fromARGB(255, 233, 233, 233),
-                    buttonRadius: 11.r,
-                    buttonBoarderWidth: 2.r,
-                    spaceBetweenButtons: 2.w,
-                    textStyle: TextStyle(
+            
+                  // word widget
+                  WordContainer(
+                    word: coreController.word,
+                    margin: EdgeInsets.symmetric(horizontal: 15.w),
+                    width: MediaQuery.of(context).size.width,
+                    height: 100.h,
+                    backgroundColor: Colors.white,
+                    spaceBetweenLetters: 3.w,
+                    letterContainerStyle: LetterContainerStyle(
+                      height: 68.r,
+                      boarderColor: Colors.grey,
+                      boarderWidth: 3.r,
+                    ),
+                    textStyle: const TextStyle(
                       color: Colors.black,
-                      fontSize: ((MediaQuery.of(context).size.width > 500) ? (coreController.language == Language.arabic ? 21 : 25) : (coreController.language == Language.arabic ? 16 : 20)).r,
                       fontFamily: 'comic sans',
                     ),
                   ),
-                  submitCommand: (letter) async {
-                    if(coreController.isLetterAvailable(letter)){
-                      setState((){
-                        trueGuess = coreController.guess(letter);
-                      });
-                      await AudioPlayer().play(AssetSource('sounds/$trueGuess.mp3'));
-                      await Future.delayed(const Duration(milliseconds: 500),(){
+            
+                  // space between
+                  SizedBox(height: 2.h,),
+            
+                  // keyboard Widget
+                  KeyboardWidget(
+                    margin: EdgeInsets.symmetric(horizontal: 15.w),
+                    width: MediaQuery.of(context).size.width,
+                    height: 200.h,
+                    boarderWidth: 3.r,
+                    radius: 20.r,
+                    backgroundColor: const Color(0xffe0e2e4),
+                    boarderColor: Colors.black,
+                    buttonsStyle: ButtonsStyle(
+                      buttonBackgroundColor: Colors.white,
+                      buttonBoarderColor: Colors.grey,
+                      buttonBoarderForegroundColor: Colors.cyan,
+                      buttonForegroundColor: const Color.fromARGB(255, 233, 233, 233),
+                      buttonRadius: 11.r,
+                      buttonBoarderWidth: 2.r,
+                      spaceBetweenButtons: 2.w,
+                      textStyle: TextStyle(
+                        color: Colors.black,
+                        fontSize: ((MediaQuery.of(context).size.width > 500) ? (coreController.language == Language.arabic ? 21 : 25) : (coreController.language == Language.arabic ? 16 : 20)).r,
+                        fontFamily: 'comic sans',
+                      ),
+                    ),
+                    submitCommand: (letter) async {
+                      if(coreController.isLetterAvailable(letter)){
                         setState((){
-                          trueGuess = null;
+                          trueGuess = coreController.guess(letter);
+                          showHintAlert = false;
                         });
-                      });
-                      if(coreController.checkWinOrLose() != null){
-                        await Future.delayed(const Duration(seconds: 1),(){
+                        await AudioPlayer().play(AssetSource('sounds/$trueGuess.mp3'));
+                        await Future.delayed(const Duration(milliseconds: 500),(){
                           setState((){
-                            win = coreController.checkWinOrLose();
+                            trueGuess = null;
                           });
                         });
+                        if(coreController.checkWinOrLose() != null){
+                          await Future.delayed(const Duration(seconds: 1),(){
+                            setState((){
+                              win = coreController.checkWinOrLose();
+                            });
+                          });
+                        }
                       }
-                    }
-                  },
-                ),
-              ],
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
 
@@ -288,6 +312,7 @@ class _HomePageState extends State<HomePage>{
               setState(() {
                 coreController.resetGame();
                 win = null;
+                showHintAlert = false;
               });
             },
           ) : LoseLable(
@@ -296,10 +321,56 @@ class _HomePageState extends State<HomePage>{
                 setState((){
                 coreController.resetGame();
                   win = null;
+                  showHintAlert = false;
                 });
               }
             )
           ),
+
+          // hints alert
+          showHintAlert ? Positioned(
+            left: 50.w,
+            top: (MediaQuery.of(context).size.width < 400 ? 290 : 310).h,
+            child: coreController.language == Language.arabic ? Container(
+              alignment: Alignment.centerRight,
+              padding: EdgeInsets.symmetric(vertical: 30.h,horizontal: 25.w),
+              decoration: const BoxDecoration(
+                color: Colors.transparent,
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: AssetImage('assets/images/hint arabic container.png'),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 15),
+                child: Text(
+                  coreController.wordHint,
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                  ),
+                ),
+              ),
+            ) : Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.symmetric(vertical: 30.h,horizontal: 25.w),
+              decoration: const BoxDecoration(
+                color: Colors.transparent,
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: AssetImage('assets/images/hint english container.png'),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 15),
+                child: Text(
+                  coreController.wordHint,
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                  ),
+                ),
+              ),
+            ),
+          ) : const SizedBox(),
         ],
       ),
     );

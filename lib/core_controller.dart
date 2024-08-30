@@ -78,29 +78,55 @@ class CoreController{
     }
   }
 
+  int _nextWordLenght(String subStr){
+    late int i;
+    for(i = 0;i<subStr.length;i++){
+      if(subStr[i] == " "){
+        return i;
+      }
+    }
+    return i;
+  }
+
   String _formteHints(String hintText){
     int counter = 0;
     String newHints = '';
-    bool newLine = false;
     for(int i = 0;i<hintText.length;i++){
+      newHints += hintText[i];
       switch(hintText[i]){
         case '\n':
           counter = 0;
           break;
+        case ' ':
+          if(counter > 25 || _nextWordLenght(hintText.substring(i+1)) + counter > 25){
+            newHints += '\n';
+            counter = 0;
+          }
         default:
           counter++;
           break;
       }
-      newHints += hintText[i];
-      if(counter > 32){
-        newLine = true;
-      }
-      if(hintText[i] == " " && newLine){
-        newLine = false;
-        counter = 0;
-        newHints += '\n';
-      }
     }
+    // bool newLine = false;
+    // for(int i = 0;i<hintText.length;i++){
+    //   switch(hintText[i]){
+    //     case '\n':
+    //       counter = 0;
+    //       break;
+    //     default:
+    //       counter++;
+    //       break;
+    //   }
+    //   newHints += hintText[i];
+    //   if(counter > 25){
+    //     newLine = true;
+    //   }
+    //   if(hintText[i] == " " && newLine){
+    //     newLine = false;
+    //     counter = 0;
+    //     newHints += '\n';
+    //   }
+    // }
     return newHints;
   }
 
