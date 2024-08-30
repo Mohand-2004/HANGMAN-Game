@@ -131,9 +131,11 @@ class _HomePageState extends State<HomePage>{
                   // hangman image
                   Expanded(
                     child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 10.w),
                       decoration: BoxDecoration(
-                        color: Colors.amber,
+                        borderRadius: BorderRadius.circular(18.r),
                         image: DecorationImage(
+                          fit: BoxFit.fill,
                           image: AssetImage(coreController.currentStage!),
                         ),
                       ),
